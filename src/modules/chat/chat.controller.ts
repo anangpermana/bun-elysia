@@ -14,9 +14,10 @@ export class ChatController {
   }
 
   static async conversation(req: any) {
-    console.log('kesini', req.user)
-    const userId = req.user.id;
+    const userId = req.authUser.id;
     const friendId = Number(req.params.userId);
+    console.log('userId', userId);
+    console.log('param', req.params);
 
     const data = await ChatService.getConversation(userId, friendId);
 
