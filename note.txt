@@ -1,0 +1,8 @@
+#generate from schema
+bunx drizzle-kit generate
+
+#apply to database
+bunx drizzle-kit migrate
+
+#ref
+https://chatgpt.com/c/692e4600-fdb0-8324-8b6f-64b813817f7e

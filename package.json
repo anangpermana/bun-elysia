@@ -1,0 +1,32 @@
+{
+  "name": "bun-elysia-drizzle",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev:api": "bun --watch src/server.ts",
+    "dev:ws": "bun --watch src/socket.ts",
+    "dev": "bun --watch src/server.ts & bun --watch src/socket.ts"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/bun": "latest",
+    "@types/socket.io": "^3.0.2",
+    "dotenv": "^17.2.3",
+    "drizzle-kit": "^0.31.7"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.0",
+    "@elysiajs/jwt": "^1.4.0",
+    "bcrypt": "^6.0.0",
+    "drizzle-orm": "^0.44.7",
+    "elysia": "^1.4.16",
+    "elysia-logger": "^0.5.2",
+    "postgres": "^3.4.7",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1"
+  }
+}
