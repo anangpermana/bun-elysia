@@ -1,4 +1,4 @@
-# bun-elysia-drizzle
+# bun-elysia-drizzle-socket-io
 
 To install dependencies:
 
