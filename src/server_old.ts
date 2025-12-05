@@ -1,9 +1,4 @@
 import { app } from "./app";
-import { engine } from "./socket";
 
-app.listen({
-  port: 3000,
-  ...engine.handler()
-});
-
+app.listen(3000);
 console.log("⚡ Elysia running at http://localhost:3000");

@@ -14,9 +14,14 @@ export function registerChatSocket(io: Server) {
 
     // menerima pesan
     socket.on("chat:send", async (data) => {
+      console.log('socket', socket.data)
       const { receiverId, message } = data;
       const senderId = socket.data.userId;
-
+      console.log('sender type', typeof(senderId))
+      console.log('receive type', typeof(receiverId))
+      console.log('sender', senderId)
+      console.log('receive', receiverId)
+      console.log('message', message)
       if (!senderId) return;
 
       const saved = await ChatService.sendMessage(senderId, receiverId, message);
