@@ -10,9 +10,26 @@ export const TodoController = {
     return { success: true, data: todo };
   },
 
-  async list(ctx: Context) {
-    const data = await TodoService.findAll();
-    return { success: true, data };
+  async list({
+    query,
+  }: {
+    query: {
+      page?: string;
+      limit?: string;
+      search?: string;
+    }
+  }) {
+    const page = query.page ? Number(query.page) : 1;
+    const limit = query.limit ? Number(query.limit) : 10;
+    const search = query.search;
+
+    const result = await TodoService.findAll({
+      page,
+      limit,
+      search
+    });
+
+    return { success: true, result };
   },
 
   async get(ctx: Context<{ params: { id: string } }>) {
