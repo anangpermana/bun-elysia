@@ -2,7 +2,7 @@
 import type { Context } from "elysia";
 import { TodoService } from "./todo.service";
 import type { CreateTodoData, UpdateTodoData } from "./todo.schema";
-import { HttpError } from "elysia-logger";
+import { HttpError } from "../../core/errors";
 
 export const TodoController = {
   async create(ctx: Context<{ body: CreateTodoData }>) {

@@ -37,6 +37,7 @@ export const AuthController = {
       }
       
     } catch (err) {
+      console.log('err', err);
       if (err instanceof AuthError) return new Response(err.message, { status: err.status });
       return new Response("Internal server error", { status: 500 });
     }
