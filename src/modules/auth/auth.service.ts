@@ -63,4 +63,21 @@ export const AuthService = {
       name: user.name,
     };
   },
+
+  profile: async (id: number) => {
+    const [user] = await db
+    .select({
+      id: users.id,
+      name: users.name,
+      email: users.email
+    })
+    .from(users)
+    .where(eq(users.id, id));
+
+    return {
+      id: user?.id,
+      email: user?.email,
+      name: user?.name,
+    };
+  }
 };

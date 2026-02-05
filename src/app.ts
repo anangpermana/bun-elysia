@@ -6,10 +6,16 @@ import { chatRoutes } from "./modules/chat/chat.routes";
 import { todoRoutes } from "./modules/todo/todo.routes";
 import { engine, io } from "./socket";
 import { registerChatSocket } from "./modules/chat/chat.socket";
+import { cors } from '@elysiajs/cors'
 
 registerChatSocket(io);
 
 export const app = new Elysia()
+  .use(
+    cors({
+      origin: '*'
+    })
+  )
   .use(logger())
   .use(jwtPlugin)
   .use(chatRoutes)

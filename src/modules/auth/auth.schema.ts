@@ -12,5 +12,12 @@ export const LoginDTO = t.Object({
   password: t.String(),
 });
 
+export const ProfileDTO = t.Object({
+  id: t.Number(),
+  name: t.String(),
+  email: t.String()
+});
+
 export type RegisterData = Static<typeof RegisterDTO>;
 export type LoginData = Static<typeof LoginDTO>;
+export type ProfileData = Static<typeof ProfileDTO>;

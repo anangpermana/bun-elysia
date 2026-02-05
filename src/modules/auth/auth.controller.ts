@@ -23,8 +23,19 @@ export const AuthController = {
 
       // jwt diakses dari context.app.jwt atau context.jwt.sign macro
       const token = await context.jwt.sign({ id: user.id, email: user.email });
-
-      return { user, token };
+      return {
+        success: true,
+        message: 'Login Successfull',
+        data: {
+          user,
+          tokens: {
+            access_token: token,
+            token_type: "bearer",
+            expires_in: 3600
+          }
+        }
+      }
+      
     } catch (err) {
       if (err instanceof AuthError) return new Response(err.message, { status: err.status });
       return new Response("Internal server error", { status: 500 });
@@ -42,8 +53,9 @@ export const AuthController = {
       // Verifikasi token lewat plugin JWT
       const payload = await context.jwt.verify(token);
       if (!payload) throw new AuthError("Unauthorized", 401);
+      const profile = await AuthService.profile(payload.id);
 
-      return { user: payload };
+      return { user: profile };
     } catch (err) {
       if (err instanceof AuthError) {
         return new Response(err.message, { status: err.status });
