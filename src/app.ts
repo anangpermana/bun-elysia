@@ -12,22 +12,6 @@ import { HttpError } from "./core/errors";
 registerChatSocket(io);
 
 export const app = new Elysia()
-  .onError(({ error, set }) => {
-    if (error instanceof HttpError) {
-      set.status = error.status;
-      return {
-        success: false,
-        status: error.status,
-        message: error.message
-      }
-    }
-    set.status = 500;
-    return {
-      success: false,
-      status: 500,
-      message: 'Internal Server Error',
-    };
-  })
   .use(
     cors({
       origin: '*'
@@ -42,6 +26,23 @@ export const app = new Elysia()
     .use(chatRoutes)
     .use(todoRoutes)
   )
+  .onError(({ error, set }) => {
+    console.error('Error:', error);
+    // if (error instanceof HttpError) {
+    //   set.status = error.status;
+    //   return {
+    //     success: false,
+    //     message: error.message
+    //   };
+    // }
+
+    set.status = 500;
+    return {
+      status: 500,
+      success: false,
+      message: "Internal Server Error"
+    };
+  })
   .all('/socket.io/*', ({ request, server}) => {
     if (!server) {
       return new Response('Socket.IO not ready', { status: 503});

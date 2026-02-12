@@ -3,7 +3,7 @@ import { users } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 import { hashPassword, comparePassword } from "../../core/hash";
 import type { RegisterData, LoginData } from "./auth.schema";
-import { AuthError } from "../../core/errors";
+import { AuthError, HttpError } from "../../core/errors";
 
 export interface AuthenticatedUser {
   id: number;
@@ -11,15 +11,15 @@ export interface AuthenticatedUser {
   name: string | null;
 }
 
-export const AuthService = {
-  register: async (data: RegisterData): Promise<AuthenticatedUser> => {
+export class AuthService {
+  static async register(data: RegisterData): Promise<AuthenticatedUser> {
     // Cek apakah email sudah terdaftar
     const [existing] = await db
       .select({ id: users.id })
       .from(users)
       .where(eq(users.email, data.email));
 
-    if (existing) throw new AuthError("Email already registered", 409);
+    if (existing) throw new HttpError(409, "Email already registered");
 
     const hashed = await hashPassword(data.password);
 
@@ -39,9 +39,9 @@ export const AuthService = {
     if (!user) throw new AuthError("Registration failed", 500);
 
     return user;
-  },
-
-  login: async (data: LoginData): Promise<AuthenticatedUser> => {
+  }
+  
+  static async login(data: LoginData): Promise<AuthenticatedUser> {
     const [user] = await db
       .select({
         id: users.id,
@@ -62,9 +62,18 @@ export const AuthService = {
       email: user.email,
       name: user.name,
     };
-  },
+  }
+  
+  static async checkUserExists(email: string): Promise<boolean> {
+    const [user] = await db
+      .select({ id: users.id })
+      .from(users)
+      .where(eq(users.email, email));
 
-  profile: async (id: number) => {
+    return !!user;
+  }
+
+  static async profile(id: number) {
     const [user] = await db
     .select({
       id: users.id,
