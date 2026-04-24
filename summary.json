@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-04-23T06:04:58.848Z",
+  "total_requests": 10621,
+  "error_rate": "0.60%",
+  "http_req_duration": {
+    "avg": "52.10ms",
+    "p90": "21.24ms",
+    "p95": "25.70ms",
+    "p99": "N/Ams"
+  },
+  "get_latency": {
+    "avg": "50.72ms",
+    "p95": "26.64ms"
+  },
+  "post_latency": {
+    "avg": "58.76ms",
+    "p95": "13.20ms"
+  }
+}

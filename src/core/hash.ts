@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "@node-rs/bcrypt"
 
 export const hashPassword = (plain: string) => bcrypt.hash(plain, 10);
 export const comparePassword = (plain: string, hash: string) =>

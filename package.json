@@ -6,7 +6,8 @@
   "scripts": {
     "dev:api": "bun --watch src/server.ts",
     "dev:ws": "bun --watch src/socket.ts",
-    "dev": "bun --watch src/server.ts & bun --watch src/socket.ts"
+    "dev": "bun --watch src/server.ts & bun --watch src/socket.ts",
+    "db:migrate": "bunx drizzle-kit migrate --config=drizzle.config.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
@@ -21,8 +22,8 @@
   "dependencies": {
     "@elysiajs/cors": "^1.4.0",
     "@elysiajs/jwt": "^1.4.0",
+    "@node-rs/bcrypt": "^1.10.7",
     "@socket.io/bun-engine": "^0.1.0",
-    "bcrypt": "^6.0.0",
     "drizzle-orm": "^0.44.7",
     "elysia": "^1.4.16",
     "elysia-logger": "^0.5.2",
